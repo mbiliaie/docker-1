@@ -1,0 +1,6 @@
+#docker run --rm -i -t debian /bin/sh
+apt-get update
+apt-get upgrade
+apt-get install gcc -y
+apt-get install git -y
+#apt-get install emacs -y

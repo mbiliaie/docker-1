@@ -1,0 +1,29 @@
+#!/bin/bash
+echo "This script helps to login & to push images faster to Docker Hub account"
+
+echo ". .. ... . .. ... . .. ... . .. ... . .. ...  . .. ...  . .. ...  . .. ... . .. ..." 
+
+read -p "Enter your Docker Hub account: " account
+echo $'\e[40;38;5;82m'"Logging in" $account"'s Docker Hub account" $'\e[0m'
+
+docker login --username $account
+echo ". .. ... . .. ... . .. ... . .. ... . .. ...  . .. ...  . .. ...  . .. ... . .. ..." 
+
+read -p "Have you got a repository created beforehand? Enter Y (yes) or N (no): " answer
+
+if [[ $answer == "Y" ]] || [[ $answer == "y" ]]; then
+	docker image ls
+	read -p "Find & enter name of the image: " image
+	docker push $account/$image
+
+elif [[ $answer == "N" ]] || [[ $answer == "n" ]]; then
+	echo "1. Log in on https://hub.docker.com/"
+	echo "2. Click on Create Repository."
+	echo "3. Choose a name e.g. test_image & a description & click Create. Thеn restart this script."
+else 
+	echo $'\n\e[38;5;226m"Unkown answer. Please restart the script!"\e[0m'
+fi
+echo ". .. ... . .. ... . .. ... . .. ... . .. ...  . .. ...  . .. ...  . .. ... . .. ..." 
+echo "Logout check:"
+
+docker logout

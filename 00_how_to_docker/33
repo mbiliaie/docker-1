@@ -1,0 +1,1 @@
+docker rmi --force $(docker image ls -a -q)
